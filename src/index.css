@@ -1,0 +1,130 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 35 25% 95%;
+    --foreground: 200 50% 20%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 200 50% 20%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 200 50% 20%;
+
+    --primary: 200 70% 30%;
+    --primary-foreground: 35 25% 95%;
+
+    --secondary: 35 25% 95%;
+    --secondary-foreground: 200 50% 20%;
+
+    --muted: 35 25% 95%;
+    --muted-foreground: 200 30% 40%;
+
+    --accent: 25 95% 50%;
+    --accent-foreground: 35 25% 95%;
+
+    --destructive: 0 85% 60%;
+    --destructive-foreground: 35 25% 95%;
+
+    --border: 200 20% 90%;
+    --input: 200 20% 90%;
+    --ring: 200 50% 20%;
+
+    --radius: 1rem;
+  }
+
+  .dark {
+    --background: 200 50% 10%;
+    --foreground: 35 25% 95%;
+
+    --card: 200 50% 10%;
+    --card-foreground: 35 25% 95%;
+
+    --popover: 200 50% 10%;
+    --popover-foreground: 35 25% 95%;
+
+    --primary: 200 70% 40%;
+    --primary-foreground: 35 25% 95%;
+
+    --secondary: 200 30% 20%;
+    --secondary-foreground: 35 25% 95%;
+
+    --muted: 200 30% 20%;
+    --muted-foreground: 200 20% 70%;
+
+    --accent: 25 95% 50%;
+    --accent-foreground: 35 25% 95%;
+
+    --destructive: 0 60% 30%;
+    --destructive-foreground: 35 25% 95%;
+
+    --border: 200 30% 20%;
+    --input: 200 30% 20%;
+    --ring: 35 25% 90%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  html {
+    font-family: "Noto Kufi Arabic", "Amiri", "Scheherazade New", serif;
+  }
+}
+
+@import url("https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@100;200;300;400;500;600;700;800;900&family=Amiri:ital,wght@0,400;0,700;1,400;1,700&family=Scheherazade+New:wght@400;700&display=swap");
+
+.icon-hover {
+  @apply transition-all duration-300 hover:scale-110 hover:text-accent;
+}
+
+.icon-active {
+  @apply transform scale-110 text-accent;
+}
+
+/* تحسينات للتصميم المتجاوب */
+@media (max-width: 640px) {
+  .mobile-nav {
+    @apply fixed bottom-0 left-0 right-0 bg-background/80 backdrop-blur-lg border-t z-50;
+  }
+
+  .mobile-content {
+    @apply pb-16; /* مساحة للقائمة السفلية */
+  }
+}
+
+/* تحسينات للبطاقات */
+.card-hover {
+  @apply transition-all duration-300 hover:shadow-lg hover:scale-[1.02] hover:bg-accent/5;
+}
+
+/* تأثيرات التحميل */
+.loading-shimmer {
+  @apply animate-pulse bg-muted;
+}
+
+/* تحسينات للأزرار */
+.button-hover {
+  @apply transition-all duration-300 hover:shadow-md active:scale-95;
+}
+
+/* تأثيرات النص */
+.text-gradient {
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-accent;
+}
+
+/* تحسينات للقوائم */
+.menu-item {
+  @apply transition-all duration-200 hover:bg-accent/10 rounded-lg;
+}
+
+/* تحسينات للمدخلات */
+.input-focus {
+  @apply focus:ring-2 focus:ring-accent/50 focus:border-accent transition-all duration-200;
+}
