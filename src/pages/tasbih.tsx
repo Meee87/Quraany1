@@ -80,7 +80,7 @@ function TasbihPage() {
       {/* Counter Display */}
       <div className="flex justify-center py-6">
         <div
-          className={`w-48 h-48 rounded-full flex items-center justify-center text-5xl font-bold shadow-lg ${count >= target ? "bg-[#1e3a8a] text-white" : "bg-white text-[#1e3a8a]"}`}
+          className={`w-48 h-48 rounded-full flex items-center justify-center text-5xl font-bold shadow-lg ${count >= target ? "bg-[#3bb1a2] text-white" : "bg-white text-[#3bb1a2]"}`}
           onClick={handleIncrement}
         >
           {count}
@@ -123,7 +123,7 @@ function TasbihPage() {
       </div>
 
       {/* Selected Tasbih */}
-      <Card className="bg-[#1e3a8a] text-white shadow-md">
+      <Card className="bg-[#3bb1a2] text-white shadow-md">
         <CardContent className="p-4 text-center">
           <h2 className="text-xl font-bold mb-1">{selectedTasbih}</h2>
         </CardContent>

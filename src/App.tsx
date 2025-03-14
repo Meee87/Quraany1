@@ -8,6 +8,8 @@ import MemorizationPage from "./pages/memorization";
 import QiblaPage from "./pages/qibla";
 import TajweedPage from "./pages/tajweed";
 import TasbihPage from "./pages/tasbih";
+import AdhkarPage from "./pages/adhkar";
+import DuasPage from "./pages/duas";
 import routes from "tempo-routes";
 
 function App() {
@@ -77,7 +79,28 @@ function App() {
               </Layout>
             }
           />
+          <Route
+            path="/adhkar"
+            element={
+              <Layout>
+                <AdhkarPage />
+              </Layout>
+            }
+          />
+          <Route
+            path="/duas"
+            element={
+              <Layout>
+                <DuasPage />
+              </Layout>
+            }
+          />
+          {/* Add a catch-all route for Tempo */}
+          {import.meta.env.VITE_TEMPO === "true" && (
+            <Route path="/tempobook/*" element={<></>} />
+          )}
         </Routes>
+        {/* Move Tempo routes after regular routes */}
         {import.meta.env.VITE_TEMPO === "true" && useRoutes(routes)}
       </>
     </Suspense>

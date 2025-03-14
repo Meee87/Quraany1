@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Clock, Calendar, MapPin, Bell, BellOff } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import {
@@ -10,35 +10,17 @@ import {
 } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
 import { useRTL } from "@/lib/rtl-context";
-import {
-  gulfCities,
-  getPrayerTimesForCity,
-  getNextPrayer,
-  PrayerTime,
-} from "@/lib/prayer-times";
+import { gulfCitiesCoordinates } from "@/lib/prayer-calculator";
+import { useAdhanPrayerTimes } from "@/hooks/use-adhan-prayer-times";
 
 function PrayerTimesPage() {
-  const [selectedDate, setSelectedDate] = useState(new Date());
   const [selectedCity, setSelectedCity] = useState("الرياض");
-  const [prayerTimes, setPrayerTimes] = useState<PrayerTime[]>([]);
-  const [nextPrayer, setNextPrayer] = useState<PrayerTime | null>(null);
   const [notificationsEnabled, setNotificationsEnabled] = useState(false);
   const { isRTL } = useRTL();
 
-  // تحديث أوقات الصلاة عند تغيير المدينة
-  useEffect(() => {
-    const times = getPrayerTimesForCity(selectedCity);
-    setPrayerTimes(times);
-    setNextPrayer(getNextPrayer(selectedCity));
-  }, [selectedCity]);
-
-  // تحديث الصلاة القادمة كل دقيقة
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setNextPrayer(getNextPrayer(selectedCity));
-    }, 60000);
-    return () => clearInterval(interval);
-  }, [selectedCity]);
+  // Use the new Adhan-based prayer times hook
+  const { prayers, nextPrayer, remainingTime, date } =
+    useAdhanPrayerTimes(selectedCity);
 
   // Format date in Arabic
   const formatDate = (date: Date) => {
@@ -107,7 +89,7 @@ function PrayerTimesPage() {
                   <SelectValue placeholder="اختر المدينة" />
                 </SelectTrigger>
                 <SelectContent>
-                  {gulfCities.map((city) => (
+                  {gulfCitiesCoordinates.map((city) => (
                     <SelectItem key={city.name} value={city.name}>
                       {city.name}، {city.country}
                     </SelectItem>
@@ -120,12 +102,12 @@ function PrayerTimesPage() {
             <Calendar
               className={`h-4 w-4 ${isRTL ? "ml-2" : "mr-2"} text-primary icon-hover`}
             />
-            <span>{formatDate(selectedDate)}</span>
+            <span>{formatDate(date)}</span>
           </div>
         </CardContent>
       </Card>
 
-      {/* Next Prayer */}
+      {/* Next Prayer with Remaining Time */}
       {nextPrayer && (
         <Card className="bg-primary text-primary-foreground shadow-md hover:shadow-lg transition-shadow duration-200">
           <CardContent className="p-4">
@@ -133,8 +115,9 @@ function PrayerTimesPage() {
             <div className="flex flex-col items-center">
               <span className="text-3xl font-bold">{nextPrayer.name}</span>
               <span className="text-4xl font-bold mt-2">
-                {nextPrayer.arabicTime}
+                {nextPrayer.arabicTimeString}
               </span>
+              <span className="mt-2 text-lg">متبقي: {remainingTime}</span>
             </div>
           </CardContent>
         </Card>
@@ -142,14 +125,14 @@ function PrayerTimesPage() {
 
       {/* All Prayer Times */}
       <div className="grid grid-cols-2 gap-3">
-        {prayerTimes.map((prayer, index) => (
+        {prayers.map((prayer, index) => (
           <Card
             key={index}
             className={`shadow-sm hover:shadow-md transition-all duration-200 ${prayer.name === nextPrayer?.name ? "bg-primary text-primary-foreground" : "bg-card hover:bg-accent/10"}`}
           >
             <CardContent className="p-3 flex justify-between items-center">
               <span className="font-bold">{prayer.name}</span>
-              <span className="text-xl">{prayer.arabicTime}</span>
+              <span className="text-xl">{prayer.arabicTimeString}</span>
             </CardContent>
           </Card>
         ))}

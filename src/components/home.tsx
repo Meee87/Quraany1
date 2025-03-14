@@ -21,7 +21,7 @@ function Home() {
   return (
     <div className="flex flex-col h-screen bg-[#f8f4e8] text-[#333]">
       {/* Top Bar */}
-      <header className="flex justify-between items-center p-4 bg-[#1e3a8a] text-white shadow-md">
+      <header className="flex justify-between items-center p-4 bg-[#3bb1a2] text-white shadow-md">
         <div className="flex items-center space-x-2">
           <BookOpen className="h-5 w-5" />
           <h1 className="text-xl font-bold">سورة الفاتحة</h1>
@@ -61,7 +61,7 @@ function Home() {
               (surah, index) => (
                 <div
                   key={index}
-                  className={`p-2 rounded-md cursor-pointer ${index === 0 ? "bg-[#1e3a8a] text-white" : "hover:bg-gray-100"}`}
+                  className={`p-2 rounded-md cursor-pointer ${index === 0 ? "bg-[#3bb1a2] text-white" : "hover:bg-gray-100"}`}
                 >
                   {surah}
                 </div>
@@ -73,11 +73,11 @@ function Home() {
         {/* Quran Text */}
         <div className="flex-1 bg-white rounded-lg shadow-md p-6 text-right">
           <div className="text-3xl leading-loose font-quran" dir="rtl">
-            <p className="mb-4 text-center text-[#1e3a8a]">
+            <p className="mb-4 text-center text-[#3bb1a2]">
               بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ
             </p>
             <p className="mb-2">
-              <span className="text-[#1e3a8a] font-bold">الْحَمْدُ</span>{" "}
+              <span className="text-[#3bb1a2] font-bold">الْحَمْدُ</span>{" "}
               لِلَّهِ رَبِّ الْعَالَمِينَ
             </p>
             <p className="mb-2">الرَّحْمَٰنِ الرَّحِيمِ</p>

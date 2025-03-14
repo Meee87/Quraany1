@@ -10,8 +10,9 @@ const RTLContext = createContext<RTLContextType>({
   toggleDirection: () => {},
 });
 
+// Export as named export instead of default export for Fast Refresh compatibility
 export function RTLProvider({ children }: { children: ReactNode }) {
-  const [isRTL, setIsRTL] = useState(true);
+  const [isRTL, setIsRTL] = useState(true); // Default to RTL
 
   const toggleDirection = () => {
     setIsRTL(!isRTL);
@@ -26,4 +27,5 @@ export function RTLProvider({ children }: { children: ReactNode }) {
   );
 }
 
+// Export as a named constant function for Fast Refresh compatibility
 export const useRTL = () => useContext(RTLContext);
