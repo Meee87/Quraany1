@@ -11,6 +11,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { PageHeader } from "@/components/page-header";
 
 function QiblaPage() {
   const [direction, setDirection] = useState<number | null>(null);
@@ -63,32 +64,36 @@ function QiblaPage() {
 
   return (
     <div className="p-4 space-y-4">
-      <div className="flex items-center justify-between mb-4">
-        <h1 className="text-xl font-bold flex items-center">
-          <Compass
-            className={`h-5 w-5 ${isRTL ? "ml-2" : "mr-2"} icon-hover`}
-          />
-          اتجاه القبلة
-        </h1>
-        <div className="flex gap-2">
-          <Button
-            variant="ghost"
-            size="icon"
-            className="icon-hover"
-            onClick={handleShare}
-          >
-            <Share2 className="h-4 w-4" />
-          </Button>
-          <Button
-            variant="ghost"
-            size="icon"
-            className="icon-hover"
-            onClick={handleDownload}
-          >
-            <Download className="h-4 w-4" />
-          </Button>
-        </div>
-      </div>
+      <PageHeader
+        title={
+          <div className="flex items-center">
+            <Compass
+              className={`h-5 w-5 ${isRTL ? "ml-2" : "mr-2"} icon-hover`}
+            />
+            <span>اتجاه القبلة</span>
+          </div>
+        }
+        rightContent={
+          <div className="flex gap-2">
+            <Button
+              variant="ghost"
+              size="icon"
+              className="icon-hover"
+              onClick={handleShare}
+            >
+              <Share2 className="h-4 w-4" />
+            </Button>
+            <Button
+              variant="ghost"
+              size="icon"
+              className="icon-hover"
+              onClick={handleDownload}
+            >
+              <Download className="h-4 w-4" />
+            </Button>
+          </div>
+        }
+      />
 
       {/* Location */}
       <Card className="bg-card shadow-sm hover:shadow-md transition-shadow duration-200">

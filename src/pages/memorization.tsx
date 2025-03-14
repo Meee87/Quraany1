@@ -10,6 +10,7 @@ import {
   Clock,
   ArrowRight,
 } from "lucide-react";
+import { PageHeader } from "@/components/page-header";
 import { Card, CardContent } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { Button } from "@/components/ui/button";
@@ -117,22 +118,26 @@ function MemorizationPage() {
 
   return (
     <div className="p-4 space-y-4">
-      <div className="flex items-center justify-between mb-4">
-        <h1 className="text-xl font-bold flex items-center">
-          <BookMarked
-            className={`h-5 w-5 ${isRTL ? "ml-2" : "mr-2"} icon-hover`}
-          />
-          حفظ القرآن
-        </h1>
-        <Button
-          variant="outline"
-          size="sm"
-          className="flex items-center icon-hover"
-        >
-          <Plus className={`h-4 w-4 ${isRTL ? "ml-1" : "mr-1"}`} />
-          <span>خطة جديدة</span>
-        </Button>
-      </div>
+      <PageHeader
+        title={
+          <div className="flex items-center">
+            <BookMarked
+              className={`h-5 w-5 ${isRTL ? "ml-2" : "mr-2"} icon-hover`}
+            />
+            <span>حفظ القرآن</span>
+          </div>
+        }
+        rightContent={
+          <Button
+            variant="outline"
+            size="sm"
+            className="flex items-center icon-hover"
+          >
+            <Plus className={`h-4 w-4 ${isRTL ? "ml-1" : "mr-1"}`} />
+            <span>خطة جديدة</span>
+          </Button>
+        }
+      />
 
       {/* Daily Goal */}
       <Card className="bg-primary text-primary-foreground shadow-md hover:shadow-lg transition-shadow duration-200">

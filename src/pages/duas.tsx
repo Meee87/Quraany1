@@ -19,6 +19,7 @@ import {
   healingDuas,
   forgivenessDuas,
 } from "@/data/duas";
+import { PageHeader } from "@/components/page-header";
 
 function DuasPage() {
   const [selectedCategory, setSelectedCategory] = useState<number | null>(null);
@@ -95,26 +96,30 @@ function DuasPage() {
 
   return (
     <div className="p-4 space-y-4">
-      <div className="flex items-center justify-between mb-4">
-        <h1 className="text-xl font-bold flex items-center">
-          <BookOpen
-            className={`h-5 w-5 ${isRTL ? "ml-2" : "mr-2"} icon-hover`}
-          />
-          الأدعية
-        </h1>
-        <div className="relative w-40">
-          <Search
-            className={`absolute ${isRTL ? "right-3" : "left-3"} top-2.5 h-4 w-4 text-muted-foreground icon-hover`}
-          />
-          <input
-            type="text"
-            placeholder="بحث..."
-            className={`w-full ${isRTL ? "pr-9 pl-3" : "pl-9 pr-3"} py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary`}
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-          />
-        </div>
-      </div>
+      <PageHeader
+        title={
+          <div className="flex items-center">
+            <BookOpen
+              className={`h-5 w-5 ${isRTL ? "ml-2" : "mr-2"} icon-hover`}
+            />
+            <span>الأدعية</span>
+          </div>
+        }
+        rightContent={
+          <div className="relative w-40">
+            <Search
+              className={`absolute ${isRTL ? "right-3" : "left-3"} top-2.5 h-4 w-4 text-muted-foreground icon-hover`}
+            />
+            <input
+              type="text"
+              placeholder="بحث..."
+              className={`w-full ${isRTL ? "pr-9 pl-3" : "pl-9 pr-3"} py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary`}
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
+          </div>
+        }
+      />
 
       {selectedCategory ? (
         <div className="space-y-4">

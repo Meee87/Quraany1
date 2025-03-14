@@ -9,6 +9,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { PageHeader } from "@/components/page-header";
 
 function TasbihPage() {
   const [count, setCount] = useState(0);
@@ -49,12 +50,14 @@ function TasbihPage() {
 
   return (
     <div className="p-4 space-y-4">
-      <div className="flex items-center justify-between mb-4">
-        <h1 className="text-xl font-bold flex items-center">
-          <Bookmark className="h-5 w-5 mr-2" />
-          المسبحة الإلكترونية
-        </h1>
-      </div>
+      <PageHeader
+        title={
+          <div className="flex items-center">
+            <Bookmark className="h-5 w-5 mr-2" />
+            <span>المسبحة الإلكترونية</span>
+          </div>
+        }
+      />
 
       {/* Tasbih Selection */}
       <Card className="bg-white shadow-sm">

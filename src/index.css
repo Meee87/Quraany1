@@ -16,7 +16,7 @@
     --primary: 169 49% 47%;
     --primary-foreground: 35 25% 95%;
 
-    --secondary: 169 49% 87%;
+    --secondary: 0 0% 85%;
     --secondary-foreground: 200 50% 20%;
 
     --muted: 35 25% 95%;
@@ -48,7 +48,7 @@
     --primary: 200 70% 40%;
     --primary-foreground: 35 25% 95%;
 
-    --secondary: 200 30% 20%;
+    --secondary: 0 0% 40%;
     --secondary-foreground: 35 25% 95%;
 
     --muted: 200 30% 20%;
@@ -89,14 +89,27 @@
   @apply transform scale-110 text-accent;
 }
 
-/* تحسينات للتصميم المتجاوب */
-@media (max-width: 640px) {
-  .mobile-nav {
-    @apply fixed bottom-0 left-0 right-0 bg-background/80 backdrop-blur-lg border-t z-50;
-  }
+/* تحسينات للتصميم المتجاوب للجوال */
+.mobile-nav {
+  @apply fixed bottom-0 left-0 right-0 bg-background/95 backdrop-blur-lg z-50 max-w-md mx-auto;
+}
 
-  .mobile-content {
-    @apply pb-16; /* مساحة للقائمة السفلية */
+.mobile-content {
+  @apply pb-[60px]; /* مساحة للقائمة السفلية */
+}
+
+/* تحسينات خاصة بأجهزة آبل والأندرويد */
+@supports (-webkit-touch-callout: none) {
+  /* تحسينات خاصة بأجهزة آبل */
+  .mobile-nav {
+    @apply pb-6; /* مساحة إضافية للـ home indicator في أجهزة آيفون الحديثة */
+  }
+}
+
+/* تحسينات للشاشات الصغيرة */
+@media (max-width: 375px) {
+  html {
+    font-size: 14px;
   }
 }
 

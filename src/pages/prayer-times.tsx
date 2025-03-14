@@ -12,6 +12,7 @@ import { Button } from "@/components/ui/button";
 import { useRTL } from "@/lib/rtl-context";
 import { gulfCitiesCoordinates } from "@/lib/prayer-calculator";
 import { useAdhanPrayerTimes } from "@/hooks/use-adhan-prayer-times";
+import { PageHeader } from "@/components/page-header";
 
 function PrayerTimesPage() {
   const [selectedCity, setSelectedCity] = useState("الرياض");
@@ -46,32 +47,38 @@ function PrayerTimesPage() {
 
   return (
     <div className="p-4 space-y-4">
-      <div className="flex items-center justify-between mb-4">
-        <h1 className="text-xl font-bold flex items-center">
-          <Clock className={`h-5 w-5 ${isRTL ? "ml-2" : "mr-2"} icon-hover`} />
-          أوقات الصلاة
-        </h1>
-        <Button
-          variant="outline"
-          size="sm"
-          className="flex items-center icon-hover"
-          onClick={toggleNotifications}
-        >
-          {notificationsEnabled ? (
-            <>
-              <Bell
-                className={`h-4 w-4 ${isRTL ? "ml-1" : "mr-1"} text-accent`}
-              />
-              <span>الإشعارات مفعلة</span>
-            </>
-          ) : (
-            <>
-              <BellOff className={`h-4 w-4 ${isRTL ? "ml-1" : "mr-1"}`} />
-              <span>تفعيل الإشعارات</span>
-            </>
-          )}
-        </Button>
-      </div>
+      <PageHeader
+        title={
+          <div className="flex items-center">
+            <Clock
+              className={`h-5 w-5 ${isRTL ? "ml-2" : "mr-2"} icon-hover`}
+            />
+            <span>أوقات الصلاة</span>
+          </div>
+        }
+        rightContent={
+          <Button
+            variant="outline"
+            size="sm"
+            className="flex items-center icon-hover"
+            onClick={toggleNotifications}
+          >
+            {notificationsEnabled ? (
+              <>
+                <Bell
+                  className={`h-4 w-4 ${isRTL ? "ml-1" : "mr-1"} text-accent`}
+                />
+                <span>الإشعارات مفعلة</span>
+              </>
+            ) : (
+              <>
+                <BellOff className={`h-4 w-4 ${isRTL ? "ml-1" : "mr-1"}`} />
+                <span>تفعيل الإشعارات</span>
+              </>
+            )}
+          </Button>
+        }
+      />
 
       {/* Location and Date */}
       <Card className="bg-card shadow-sm hover:shadow-md transition-shadow duration-200">

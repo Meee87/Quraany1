@@ -14,6 +14,9 @@ import {
   BookText,
   Menu,
   X,
+  FileText,
+  BarChart2,
+  Heart,
 } from "lucide-react";
 import { useRTL } from "@/lib/rtl-context";
 import { Button } from "./ui/button";
@@ -30,7 +33,7 @@ function Layout({ children }: LayoutProps) {
   // Main navigation items (shown in bottom nav)
   const mainNavItems = [
     { icon: HomeIcon, label: "الرئيسية", path: "/" },
-    { icon: BookOpen, label: "المصحف", path: "/quran" },
+    { icon: BookOpen, label: "المصحف", path: "/quran-mushaf" },
     { icon: Clock, label: "أوقات الصلاة", path: "/prayer-times" },
     { icon: Compass, label: "اتجاه القبلة", path: "/qibla" },
   ];
@@ -39,6 +42,7 @@ function Layout({ children }: LayoutProps) {
   const allNavItems = [
     { icon: HomeIcon, label: "الرئيسية", path: "/" },
     { icon: BookOpen, label: "المصحف", path: "/quran" },
+    { icon: FileText, label: "المصحف الأنيق", path: "/elegant-mushaf" },
     { icon: Clock, label: "أوقات الصلاة", path: "/prayer-times" },
     { icon: BookMarked, label: "الحفظ", path: "/memorization" },
     { icon: Compass, label: "اتجاه القبلة", path: "/qibla" },
@@ -46,6 +50,11 @@ function Layout({ children }: LayoutProps) {
     { icon: Bookmark, label: "التسابيح", path: "/tasbih" },
     { icon: Shield, label: "حصن المسلم", path: "/adhkar" },
     { icon: BookText, label: "الأدعية", path: "/duas" },
+    { icon: Moon, label: "وضع القراءة الليلي", path: "/night-mode" },
+    { icon: BarChart2, label: "إحصائيات وتحفيز", path: "/quran-stats" },
+    { icon: Heart, label: "القرآن في حياتك", path: "/quran-in-life" },
+    { icon: Sun, label: "القرآن التفاعلي", path: "/interactive-quran" },
+    { icon: BookOpen, label: "القرآن للأطفال", path: "/quran-for-kids" },
   ];
 
   return (

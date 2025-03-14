@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useRTL } from "@/lib/rtl-context";
 import { dhikrCategories, morningAdhkar, eveningAdhkar } from "@/data/adhkar";
+import { PageHeader } from "@/components/page-header";
 
 function AdhkarPage() {
   const [selectedCategory, setSelectedCategory] = useState<number | null>(null);
@@ -86,24 +87,30 @@ function AdhkarPage() {
 
   return (
     <div className="p-4 space-y-4">
-      <div className="flex items-center justify-between mb-4">
-        <h1 className="text-xl font-bold flex items-center">
-          <Shield className={`h-5 w-5 ${isRTL ? "ml-2" : "mr-2"} icon-hover`} />
-          حصن المسلم
-        </h1>
-        <div className="relative w-40">
-          <Search
-            className={`absolute ${isRTL ? "right-3" : "left-3"} top-2.5 h-4 w-4 text-muted-foreground icon-hover`}
-          />
-          <input
-            type="text"
-            placeholder="بحث..."
-            className={`w-full ${isRTL ? "pr-9 pl-3" : "pl-9 pr-3"} py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary`}
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-          />
-        </div>
-      </div>
+      <PageHeader
+        title={
+          <div className="flex items-center">
+            <Shield
+              className={`h-5 w-5 ${isRTL ? "ml-2" : "mr-2"} icon-hover`}
+            />
+            <span>حصن المسلم</span>
+          </div>
+        }
+        rightContent={
+          <div className="relative w-40">
+            <Search
+              className={`absolute ${isRTL ? "right-3" : "left-3"} top-2.5 h-4 w-4 text-muted-foreground icon-hover`}
+            />
+            <input
+              type="text"
+              placeholder="بحث..."
+              className={`w-full ${isRTL ? "pr-9 pl-3" : "pl-9 pr-3"} py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary`}
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
+          </div>
+        }
+      />
 
       {selectedCategory ? (
         <div className="space-y-4">

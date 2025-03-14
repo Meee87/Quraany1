@@ -8,11 +8,16 @@ import {
   Bookmark,
   Shield,
   BookText,
+  Moon,
+  BarChart2,
+  Heart,
+  Sun,
 } from "lucide-react";
 import { Card, CardContent } from "./ui/card";
 import { Link } from "react-router-dom";
 import { useRTL } from "@/lib/rtl-context";
 import { useAdhanPrayerTimes } from "@/hooks/use-adhan-prayer-times";
+import { IconButton } from "./ui/icon-button";
 
 function HomePage() {
   const [currentTime, setCurrentTime] = useState(new Date());
@@ -41,58 +46,106 @@ function HomePage() {
     {
       title: "المصحف",
       description: "قراءة القرآن الكريم",
-      path: "/quran",
-      icon: BookOpen,
+      path: "/elegant-mushaf",
+      iconUrl: "https://cdn-icons-png.flaticon.com/512/3004/3004592.png",
       active: true,
+      notification: true,
     },
     {
       title: "أوقات الصلاة",
       description: "مواقيت الصلاة اليومية",
       path: "/prayer-times",
-      icon: Clock,
+      iconUrl: "https://cdn-icons-png.flaticon.com/512/2454/2454306.png",
       active: true,
+      notification: false,
     },
     {
       title: "الحفظ",
       description: "حفظ القرآن الكريم",
       path: "/memorization",
-      icon: BookMarked,
+      iconUrl: "https://cdn-icons-png.flaticon.com/512/3426/3426653.png",
       active: true,
+      notification: false,
     },
     {
       title: "اتجاه القبلة",
       description: "تحديد اتجاه القبلة",
       path: "/qibla",
-      icon: Compass,
+      iconUrl: "https://cdn-icons-png.flaticon.com/512/7505/7505004.png",
       active: true,
+      notification: false,
     },
     {
       title: "تعلم التجويد",
       description: "دروس في أحكام التجويد",
       path: "/tajweed",
-      icon: Mic2,
+      iconUrl: "https://cdn-icons-png.flaticon.com/512/3094/3094019.png",
       active: true,
+      notification: false,
     },
     {
       title: "التسابيح",
       description: "سبحة إلكترونية",
       path: "/tasbih",
-      icon: Bookmark,
+      iconUrl: "https://cdn-icons-png.flaticon.com/512/2417/2417785.png",
       active: true,
+      notification: false,
     },
     {
       title: "حصن المسلم",
       description: "أذكار وأدعية المسلم",
       path: "/adhkar",
-      icon: Shield,
+      iconUrl: "https://cdn-icons-png.flaticon.com/512/6520/6520101.png",
       active: true,
+      notification: true,
     },
     {
       title: "الأدعية",
       description: "أدعية من القرآن والسنة",
       path: "/duas",
-      icon: BookText,
+      iconUrl: "https://cdn-icons-png.flaticon.com/512/2829/2829125.png",
       active: true,
+      notification: false,
+    },
+    {
+      title: "وضع القراءة الليلي",
+      description: "قراءة القرآن في الظلام",
+      path: "/night-mode",
+      iconUrl: "https://cdn-icons-png.flaticon.com/512/3094/3094811.png",
+      active: true,
+      notification: false,
+    },
+    {
+      title: "إحصائيات وتحفيز",
+      description: "متابعة تقدمك في القراءة والحفظ",
+      path: "/quran-stats",
+      iconUrl: "https://cdn-icons-png.flaticon.com/512/2936/2936690.png",
+      active: true,
+      notification: false,
+    },
+    {
+      title: "القرآن في حياتك",
+      description: "تطبيقات عملية للقرآن",
+      path: "/quran-in-life",
+      iconUrl: "https://cdn-icons-png.flaticon.com/512/3820/3820248.png",
+      active: true,
+      notification: false,
+    },
+    {
+      title: "القرآن التفاعلي",
+      description: "تجربة تفاعلية للقرآن",
+      path: "/interactive-quran",
+      iconUrl: "https://cdn-icons-png.flaticon.com/512/5229/5229336.png",
+      active: true,
+      notification: false,
+    },
+    {
+      title: "القرآن للأطفال",
+      description: "تعليم القرآن للأطفال",
+      path: "/quran-for-kids",
+      iconUrl: "https://cdn-icons-png.flaticon.com/512/3094/3094188.png",
+      active: true,
+      notification: false,
     },
   ];
 
@@ -132,25 +185,53 @@ function HomePage() {
       {/* Quick Access */}
       <div className="space-y-2">
         <h2 className="font-bold text-lg">الأقسام</h2>
-        <div className="grid grid-cols-2 gap-3">
-          {quickAccess.map((item, index) => {
-            const Icon = item.icon;
-            return (
-              <Link to={item.path} key={index}>
-                <Card className="bg-card shadow-sm hover:shadow-md transition-all duration-200 hover:bg-accent/10">
-                  <CardContent className="p-3">
-                    <div className="flex items-center gap-2 mb-1">
-                      <Icon className="h-5 w-5 text-primary icon-hover" />
-                      <h3 className="font-bold">{item.title}</h3>
+        <div className="grid grid-cols-4 gap-3">
+          {quickAccess.map((item, index) => (
+            <Link to={item.path} key={index} className="flex justify-center">
+              <IconButton
+                icon={
+                  <img
+                    src={item.iconUrl}
+                    alt={item.title}
+                    className="w-8 h-8"
+                  />
+                }
+                label={item.title}
+                active={item.active}
+                notification={item.notification}
+              />
+            </Link>
+          ))}
+        </div>
+      </div>
+
+      {/* Features Description */}
+      <div className="space-y-2">
+        <h2 className="font-bold text-lg">الميزات المتاحة</h2>
+        <div className="grid grid-cols-1 gap-3">
+          {quickAccess.map((item, index) => (
+            <Link to={item.path} key={index}>
+              <Card className="bg-card shadow-sm hover:shadow-md transition-all duration-200 hover:bg-accent/10">
+                <CardContent className="p-3">
+                  <div className="flex items-center gap-3">
+                    <div className="w-12 h-12 rounded-full flex items-center justify-center bg-primary/10">
+                      <img
+                        src={item.iconUrl}
+                        alt={item.title}
+                        className="w-6 h-6"
+                      />
                     </div>
-                    <p className="text-xs text-muted-foreground">
-                      {item.description}
-                    </p>
-                  </CardContent>
-                </Card>
-              </Link>
-            );
-          })}
+                    <div>
+                      <h3 className="font-bold">{item.title}</h3>
+                      <p className="text-xs text-muted-foreground">
+                        {item.description}
+                      </p>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </Link>
+          ))}
         </div>
       </div>
     </div>

@@ -1,22 +1,22 @@
 import { useState, useEffect } from "react";
 import {
-  Search,
-  BookOpen,
   Play,
   Pause,
-  Bookmark,
-  Share2,
   Settings,
-  ChevronDown,
-  ChevronUp,
+  Search,
+  BookOpen,
+  Share2,
+  Bookmark,
+  Menu,
   Volume2,
   VolumeX,
   SkipForward,
   SkipBack,
+  ChevronDown,
+  ChevronUp,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useRTL } from "@/lib/rtl-context";
-import { reciters, Reciter } from "@/lib/reciters";
+import { Slider } from "@/components/ui/slider";
 import {
   Select,
   SelectContent,
@@ -24,16 +24,20 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Slider } from "@/components/ui/slider";
+import { useRTL } from "@/lib/rtl-context";
 import { quranSurahs } from "@/data/quran-surahs";
 import { getSurahText } from "@/data/quran-text";
 import { useAudioPlayer } from "@/hooks/use-audio-player";
 import { Progress } from "@/components/ui/progress";
+import { PageHeader } from "@/components/page-header";
 
 function QuranPage() {
   const [selectedSurahId, setSelectedSurahId] = useState(1); // Default to Al-Fatiha
   const [highlightedWord, setHighlightedWord] = useState<string | null>(null);
-  const [selectedReciter, setSelectedReciter] = useState<Reciter>(reciters[0]);
+  const [selectedReciter, setSelectedReciter] = useState<any>({
+    id: "mishary",
+    arabicName: "مشاري راشد العفاسي",
+  });
   const [showReciterSelector, setShowReciterSelector] = useState(false);
   const [showSpeedControl, setShowSpeedControl] = useState(false);
   const [surahText, setSurahText] = useState(getSurahText(1));
@@ -99,7 +103,7 @@ function QuranPage() {
     if (showReciterSelector) setShowReciterSelector(false);
   };
 
-  const handleReciterChange = (reciter: Reciter) => {
+  const handleReciterChange = (reciter: any) => {
     setSelectedReciter(reciter);
     setShowReciterSelector(false);
     if (audioState.isPlaying) {
@@ -114,24 +118,28 @@ function QuranPage() {
 
   return (
     <div className="p-4">
-      <div className="flex items-center justify-between mb-4">
-        <h1 className="text-xl font-bold flex items-center">
-          <BookOpen
-            className={`h-5 w-5 ${isRTL ? "ml-2" : "mr-2"} icon-hover`}
-          />
-          المصحف الشريف
-        </h1>
-        <div className="relative w-40">
-          <Search
-            className={`absolute ${isRTL ? "right-3" : "left-3"} top-2.5 h-4 w-4 text-muted-foreground icon-hover`}
-          />
-          <input
-            type="text"
-            placeholder="بحث..."
-            className={`w-full ${isRTL ? "pr-9 pl-3" : "pl-9 pr-3"} py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary`}
-          />
-        </div>
-      </div>
+      <PageHeader
+        title={
+          <div className="flex items-center">
+            <BookOpen
+              className={`h-5 w-5 ${isRTL ? "ml-2" : "mr-2"} icon-hover`}
+            />
+            <span>المصحف الشريف</span>
+          </div>
+        }
+        rightContent={
+          <div className="relative w-40">
+            <Search
+              className={`absolute ${isRTL ? "right-3" : "left-3"} top-2.5 h-4 w-4 text-muted-foreground icon-hover`}
+            />
+            <input
+              type="text"
+              placeholder="بحث..."
+              className={`w-full ${isRTL ? "pr-9 pl-3" : "pl-9 pr-3"} py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary`}
+            />
+          </div>
+        }
+      />
 
       <div className="flex h-[calc(100vh-180px)]">
         {/* Surah List */}
@@ -313,7 +321,11 @@ function QuranPage() {
           {showReciterSelector && (
             <div className="mt-2 p-2 bg-card text-card-foreground rounded-md shadow-md">
               <div className="grid grid-cols-2 gap-2">
-                {reciters.map((reciter) => (
+                {[
+                  { id: "mishary", arabicName: "مشاري راشد العفاسي" },
+                  { id: "sudais", arabicName: "عبد الرحمن السديس" },
+                  { id: "minshawi", arabicName: "محمد صديق المنشاوي" },
+                ].map((reciter) => (
                   <div
                     key={reciter.id}
                     className={`p-2 rounded-md cursor-pointer flex items-center ${reciter.id === selectedReciter.id ? "bg-accent/20" : "hover:bg-accent/10"}`}
@@ -321,9 +333,6 @@ function QuranPage() {
                   >
                     <div className="flex-1">
                       <div className="font-medium">{reciter.arabicName}</div>
-                      <div className="text-xs text-muted-foreground">
-                        {reciter.country}
-                      </div>
                     </div>
                   </div>
                 ))}

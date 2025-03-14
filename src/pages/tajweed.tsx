@@ -12,6 +12,7 @@ import {
   Download,
   ArrowRight,
 } from "lucide-react";
+import { PageHeader } from "@/components/page-header";
 import { Card, CardContent } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { Button } from "@/components/ui/button";
@@ -54,14 +55,16 @@ function TajweedPage() {
         />
       ) : (
         <>
-          <div className="flex items-center justify-between mb-4">
-            <h1 className="text-xl font-bold flex items-center">
-              <Mic2
-                className={`h-5 w-5 ${isRTL ? "ml-2" : "mr-2"} icon-hover`}
-              />
-              تعلم التجويد
-            </h1>
-          </div>
+          <PageHeader
+            title={
+              <div className="flex items-center">
+                <Mic2
+                  className={`h-5 w-5 ${isRTL ? "ml-2" : "mr-2"} icon-hover`}
+                />
+                <span>تعلم التجويد</span>
+              </div>
+            }
+          />
 
           {/* Progress Overview */}
           <Card className="bg-primary text-primary-foreground shadow-md">
